@@ -90,5 +90,3 @@
 ;;   (foreign-procedure "glfwSetErrorCallback" ((* glfw-error-fun)) (* glfw-error-fun)))
 
 )
-
-
