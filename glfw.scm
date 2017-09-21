@@ -25,6 +25,16 @@
   glfw-set-error-callback)
  (import (chezscheme))
  ;; 加载gflw动态库文件 
+
+ (define-syntax callback
+   (syntax-rules ()
+     [(_ p (args ...) ret)
+      (let ([code (foreign-callable p (args ...) ret)])
+	(lock-object code)
+	(foreign-callable-entry-point code))]))
+ 
+ 
+ (define libglfw (load-shared-object "libglfw.so"))
  
  ;; Error Code
  ;;GLFW has not been initialized.
@@ -49,7 +59,7 @@
  (define GLFW_NO_WINDOW_CONTEXT   #x0001000A)
 
  ;; 错误回调函数类型的定义
- (define-ftype glfw-error-fun (function (int string) void))
+ ;; (define-ftype glfw-error-fun (function (int string) void))
 
  ;; (load-shared-object "/root/glfw-3.2.1/build/src/libglfw.so")
 
@@ -72,6 +82,13 @@
  (define glfw-get-version-string
    (foreign-procedure "glfwGetVersionString" () string))
 
+(define (glfw-set-error-callback cb)
+  ((foreign-procedure "glfwSetErrorCallback" (uptr) void)
+   (callback cb (int string) void)))
 
- (define glfw-set-error-callback
-   (foreign-procedure "glfwSetErrorCallback" ((* glfw-error-fun)) (* glfw-error-fun))))
+;; (define glfw-set-error-callback
+;;   (foreign-procedure "glfwSetErrorCallback" ((* glfw-error-fun)) (* glfw-error-fun)))
+
+)
+
+
