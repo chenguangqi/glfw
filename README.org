@@ -1,0 +1,11 @@
+
+* GLFW for chez-scheme binding
+  This is a scheme library about GLFW.
+
+** Usgae
+#+begin_src scheme
+  (load-shared-object "/root/glfw-3.2.1/build/src/libglfw.so")
+  (import (glfw glfw))
+#+end_src
+
+
