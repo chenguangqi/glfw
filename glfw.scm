@@ -18,75 +18,31 @@
 (library
  (glfw glfw)
  (export
-  glfw-init
-  glfw-get-version
-  glfw-get-version-string
-  glfw-terminate
-  glfw-set-error-callback)
+  glfwInit
+  glfwGetVersion
+  glfwGetVersionString
+  glfwTerminate)
  (import (chezscheme))
  ;; 加载gflw动态库文件 
 
- (define-syntax callback
-   (syntax-rules ()
-     [(_ p (args ...) ret)
-      (let ([code (foreign-callable p (args ...) ret)])
-	(lock-object code)
-	(foreign-callable-entry-point code))]))
- 
- 
  (define libglfw (load-shared-object "libglfw.so"))
  
- ;; Error Code
- ;;GLFW has not been initialized.
- (define GLFW_NOT_INITIALIZED     #x00010001)
- ;;No context is current for this thread.
- (define GLFW_NO_CURRENT_CONTEXT  #x00010002)
- ;;One of the arguments to the function was an invalid enum value.
- (define GLFW_INVALID_ENUM        #x00010003)
- ;;One of the arguments to the function was an invalid value.
- (define GLFW_INVALID_VALUE       #x00010004)
- ;;A memory allocation failed.
- (define GLFW_OUT_OF_MEMORY       #x00010005)
- ;;GLFW could not find support for the requested API on the system.
- (define GLFW_API_UNAVAILABLE     #x00010006)
- ;;The requested OpenGL or OpenGL ES version is not available.
- (define GLFW_VERSION_UNAVAILABLE #x00010007)
- ;;A platform-specific error occurred that does not match any of the more specific categories.
- (define GLFW_PLATFORM_ERROR      #x00010008)
- ;;The requested format is not supported or available.
- (define GLFW_FORMAT_UNAVAILABLE  #x00010009)
- ;;The specified window does not have an OpenGL or OpenGL ES context.
- (define GLFW_NO_WINDOW_CONTEXT   #x0001000A)
-
- ;; 错误回调函数类型的定义
- ;; (define-ftype glfw-error-fun (function (int string) void))
-
- ;; (load-shared-object "/root/glfw-3.2.1/build/src/libglfw.so")
-
- (define glfw-init
+ (define glfwInit
     (foreign-procedure "glfwInit" () boolean))
 
- (define glfw-terminate
+ (define glfwTerminate
    (foreign-procedure "glfwTerminate" () void))
 
- (define glfw-get-version
+ (define glfwGetVersion
    (lambda ()
-     (define get-version (foreign-procedure "glfwGetVersion" ((* int) (* int) (* int)) void))
-       (let ([major (make-ftype-pointer int (foreign-alloc (ftype-sizeof int)))]
-	     [minor (make-ftype-pointer int (foreign-alloc (ftype-sizeof int)))]
-	     [  rev (make-ftype-pointer int (foreign-alloc (ftype-sizeof int)))])
-	 (get-version major minor rev)
-	 (values (ftype-ref int () major)
-		 (ftype-ref int () minor)
-		 (ftype-ref int () rev)))))
- (define glfw-get-version-string
+     (let ([major (make-ftype-pointer int (foreign-alloc (ftype-sizeof int)))]
+	   [minor (make-ftype-pointer int (foreign-alloc (ftype-sizeof int)))]
+	   [  rev (make-ftype-pointer int (foreign-alloc (ftype-sizeof int)))])
+       ((foreign-procedure "glfwGetVersion" ((* int) (* int) (* int)) void) major minor rev)
+       (values (ftype-ref int () major)
+	       (ftype-ref int () minor)
+	       (ftype-ref int () rev)))))
+ 
+ (define glfwGetVersionString
    (foreign-procedure "glfwGetVersionString" () string))
-
-(define (glfw-set-error-callback cb)
-  ((foreign-procedure "glfwSetErrorCallback" (uptr) void)
-   (callback cb (int string) void)))
-
-;; (define glfw-set-error-callback
-;;   (foreign-procedure "glfwSetErrorCallback" ((* glfw-error-fun)) (* glfw-error-fun)))
-
 )
