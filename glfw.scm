@@ -23,8 +23,8 @@
   glfwGetVersionString
   glfwTerminate)
  (import (chezscheme))
- ;; 加载gflw动态库文件 
 
+ ;; 加载gflw动态库文件 
  (define libglfw (load-shared-object "libglfw.so"))
  
  (define glfwInit
