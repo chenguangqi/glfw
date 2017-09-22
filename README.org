@@ -5,7 +5,10 @@
 ** Usgae
 #+begin_src scheme
   (load-shared-object "/root/glfw-3.2.1/build/src/libglfw.so")
-  (import (glfw glfw))
+  (import
+   (glfw init)
+   (glfw constants)
+   (glfw callbacks))
 #+end_src
 
 

@@ -39,9 +39,11 @@
 	   [minor (make-ftype-pointer int (foreign-alloc (ftype-sizeof int)))]
 	   [  rev (make-ftype-pointer int (foreign-alloc (ftype-sizeof int)))])
        ((foreign-procedure "glfwGetVersion" ((* int) (* int) (* int)) void) major minor rev)
-       (values (ftype-ref int () major)
-	       (ftype-ref int () minor)
-	       (ftype-ref int () rev)))))
+       (let ([major-val (ftype-ref int () major)]
+	     [minor-val (ftype-ref int () minor)]
+	     [  rev-val (ftype-ref int () rev)])
+	 (values major-val minor-val rev-val)))))
+ 
  
  (define glfwGetVersionString
    (foreign-procedure "glfwGetVersionString" () string))
