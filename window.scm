@@ -40,7 +40,7 @@
    )
   (import
    (chezscheme)
-   (glfw-utils))
+   (glfw utils))
   ;; GLFWAPI GLFWwindow* glfwCreateWindow(int width, int height,
   ;;					   const char* title,
   ;;					   GLFWmonitor* monitor,
@@ -64,7 +64,7 @@
   
   ;; GLFWAPI void glfwSetWindowIcon(GLFWwindow* handle,
   ;;					     int count, const GLFWimage* images)
-  (define-foreign-function glfwSetWindowIcon (uptr int (* GLFWimage)) void)
+  (define-foreign-function glfwSetWindowIcon (uptr int uptr) void)
   
   ;; GLFWAPI void glfwGetWindowPos(GLFWwindow* handle, int* xpos, int* ypos)
   (define-foreign-function glfwGetWindowPos (uptr (* int) (* int)) void)

@@ -1,7 +1,10 @@
 (library
     (glfw vulkan)
   (export
-
+   glfwVulkanSupported
+   glfwGetInstanceProcAddress
+   glfwGetPhysicalDevicePresentationSupport
+   glfwCreateWindowSurface
    )
   (import
    (chezscheme)

@@ -318,13 +318,69 @@
    glfwSwapInterval
    glfwExtensionSupported
    glfwGetProcAddress
+
+   ;; input
+   glfwGetInputMode
+   glfwSetInputMode
+   glfwGetKeyName
+   glfwGetKey
+   glfwGetMouseButton
+   glfwGetCursorPos
+   glfwSetCursorPos
+   glfwCreateCursor
+   glfwCreateStandardCursor
+   glfwDestroyCursor
+   glfwSetCursor
+   glfwSetKeyCallback
+   glfwSetCharCallback
+   glfwSetCharModsCallback
+   glfwSetMouseButtonCallback
+   glfwSetCursorPosCallback
+   glfwSetCursorEnterCallback
+   glfwSetScrollCallback
+   glfwSetDropCallback
+   glfwJoystickPresent
+   glfwGetJoystickAxes
+   glfwGetJoystickButtons
+   glfwGetJoystickName
+   glfwSetJoystickCallback
+   glfwSetClipboardString
+   glfwGetClipboardString
+   glfwGetTime
+   glfwSetTime
+   glfwGetTimerValue
+   glfwGetTimerFrequency
+   
+   ;; monitor
+   glfwGetMonitors
+   glfwGetPrimaryMonitor
+   glfwGetMonitorPos
+   glfwGetMonitorPhysicalSize
+   glfwGetMonitorName
+   glfwSetMonitorCallback
+   glfwGetVideoModes
+   glfwGetVideoMode
+   glfwSetGamma
+   glfwGetGammaRamp
+   glfwSetGammaRamp
+
+   ;; vulkan
+   glfwVulkanSupported
+   glfwGetInstanceProcAddress
+   glfwGetPhysicalDevicePresentationSupport
+   glfwCreateWindowSurface
    
    )
   (import
    (glfw constants)
    (glfw types)
+;;   (glfw utils)
    (glfw init)
    (glfw window)
-   (glfw context))
+   (glfw context)
+   (glfw input)
+   (glfw monitor)
+   (glfw vulkan))
+
 
   )

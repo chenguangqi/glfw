@@ -23,7 +23,7 @@
    GLFWmonitorfun
    GLFWjoystickfun)
   (import
-   (scheme))
+   (chezscheme))
   
   ;;  typedef struct GLFWimage
   ;;  {

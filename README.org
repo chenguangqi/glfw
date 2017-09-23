@@ -3,12 +3,17 @@
   This is a scheme library about GLFW.
 
 ** Usgae
+examples/init.scm
+
 #+begin_src scheme
-  (load-shared-object "/root/glfw-3.2.1/build/src/libglfw.so")
+  #! /usr/bin/env scheme-script
+
   (import
-   (glfw init)
-   (glfw constants)
-   (glfw callbacks))
+   (chezscheme)
+   (glfw glfw))
+
+  (display (glfwGetVersionString))
+  (newline)
 #+end_src
 
 
