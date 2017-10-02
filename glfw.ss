@@ -374,7 +374,6 @@
   (import
    (glfw constants)
    (glfw types)
-;;   (glfw utils)
    (glfw init)
    (glfw window)
    (glfw context)

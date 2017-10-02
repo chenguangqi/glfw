@@ -15,8 +15,7 @@
 
 ;;; 在初始化之前，调用其他函数将发生 GLFW_NOT_INITIALIZED 错误。
 ;;; 使用glfwInit初始化库，如果发生错误将返回 GLFW_FALSE
-(library
-    (glfw init)
+(library (glfw init)
   (export
    glfwInit
    glfwTerminate
@@ -29,10 +28,6 @@
    (chezscheme)
    (glfw utils))
  
-  ;; load libglfw.so
-  (define libglfw (load-shared-object "libglfw.so"))
-
-  
   (define-foreign-function glfwInit () boolean)
   (define-foreign-function glfwTerminate () void)
   (define-foreign-function glfwGetVersion ((* int) (* int) (* int)) void)
